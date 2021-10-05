@@ -1,0 +1,32 @@
+{% extends 'base/index.html' %}
+{% block container %}
+<label for="">Proyecto curricular</label>
+    <select name="proyecto" required>
+        <option value=""></option>
+        <option value="">Todos los proyectos</option>
+    </select>
+    <label for="">Año</label>
+    <select name="year" required>
+    {%for i in range(2000,2019)%}
+        {%if i ==2000%}
+            <option value=""></option>
+        {%else%}
+            <option value="{{i}}">{{i}}</option>
+        {%endif%}
+    {%endfor%}    
+    </select>
+    <label for="">Sexo</label>
+    <select name="sexo" required>
+        <option value=""></option>
+        <option value="M">M</option>
+        <option value="F">F</option>
+    </select>
+    <label for="">Periodo</label>
+    <select id="semestre" required>
+        <option value=""></option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+    </select>
+        <br>
+    <script src="static/js/app.js"></script>    
+{%endblock container %}
