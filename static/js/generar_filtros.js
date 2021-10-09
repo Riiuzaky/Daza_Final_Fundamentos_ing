@@ -26,7 +26,7 @@ $(document).ready(function(){
         
     });
     function ajax_login(){
-        var data =$('#datos').serialize();
+         var data =$('#datos').serialize();
         $('#contenedor select').prop('disabled',true);
         $('#limpiar').show(100);
         console.log(data)

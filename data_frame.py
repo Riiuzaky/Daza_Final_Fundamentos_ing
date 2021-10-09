@@ -7,28 +7,47 @@ class Data_frame:
     def __init__(self):
         self.data_frame =pd.read_excel('data_frame.xlsx')
         self.diccionario ={'proyecto':'Programa Académico','year':'Año','sexo':'Sexo','semestre':'Semestre'}
+        self.sexov={'M':'HOMBRE','F':'MUJER'}
         datas= self.data_frame.groupby(['Programa Académico'],as_index=False)['Graduados'].sum()
         self.programas = datas['Programa Académico']
+             
+    def Generar_tabla2(self,diccio):
+        keys= list(diccio.keys())
+        valores= list(diccio.values())
+        columnas=[]
+        consulta=None
+        for i in range(len(keys)) :
+            aux=self.diccionario.get(keys[i])
+            columnas.append(aux)
 
-    def Generar_tabla(self,year=0,sexo='',Proyecto='',semestre=0):        
-        if year==0 and  sexo=='' and Proyecto=='' and semestre==0: 
-            return "No a Seleccionado los datos, por favor escoja  datos validos"
-        else:
-            if Proyecto ==''and year!=0 and sexo!='' and semestre!=0:
-                retorno =self.data_frame[(self.data_frame['Año']==year)&(self.data_frame['Sexo']==sexo)&(self.data_frame['Semestre']==semestre)]
-                return retorno
-            elif year!=0 or sexo!=''or Proyecto!=''or semestre!=0:
-                
-                return'Por favor rellene todos los campos ade mas del proyecto'
-    """
-    def Generar_tabla(diccionario):
+        df = self.data_frame.groupby(columnas,as_index=False).agg({
+            'Graduados':'sum'
+        })
+        for i in range(len(columnas)):
+            if columnas[i] =='Sexo':
+                if i==0:
+                    consulta=df[(df[columnas[i]]==self.sexov.get(valores[i]))]    
+                else:
+                    aux=consulta[(consulta[columnas[i]]==self.sexov.get(valores[i]))]
+                    consulta=aux
+            else:
+                if valores[i].isnumeric():
+                    if i==0:
+                        consulta=df[(df[columnas[i]]==int(valores[i]))]
+                    else:
+                        aux=consulta[(consulta[columnas[i]]==int(valores[i]))]
+                        consulta=aux
+                else:
+                    if i==0:
+                        consulta=df[(df[columnas[i]]==(valores[i]))]
+                    else:
+                        aux=consulta[(consulta[columnas[i]]==(valores[i]))]
+                        consulta=aux        
+        
+        return consulta       
+
 
     
-    
-    
-    
-    
-    """    
 
     def Get_programs(self):
         return self.programas

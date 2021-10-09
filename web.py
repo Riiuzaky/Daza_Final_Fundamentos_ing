@@ -11,10 +11,7 @@ Dframe=Data_frame()
 def Index():
     if request.method=='GET':
         programas=Dframe.Get_programs()
-        return render_template('base/index.html',programas=programas)
-    else:
-        Dframe.Generar_tabla()
-        return'<h1>metodo post</h1>'  
+        return render_template('index.html',programas=programas)  
 
 
 @app.route('/peticion', methods=["POST"])
@@ -26,7 +23,8 @@ def nueva_ruta():
     for i in range(len(valores)):
         if valores[i]!='':
             datos[keys[i]]=valores[i]
-    print(datos)
+    df=Dframe.Generar_tabla2(datos)
+    print(df)
     return json.dumps(response)
 
 
