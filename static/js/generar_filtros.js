@@ -8,8 +8,11 @@ $(document).ready(function(){
         contador=0;
         $('#contenedor select').val('');
         $('#contenedor select').prop('disabled',false);
+        $('#imagen').attr('src','');
+        $('#tabla table').remove();
         $('#pruebab').hide(3);
-        $('#limpiar').hide(3);         
+        $('#limpiar').hide(3);  
+
     });
     $('#contenedor select').change(function(e){ 
         function diferente(valor){
@@ -35,8 +38,7 @@ $(document).ready(function(){
             type : 'POST',
             success: function(response){
                 var dicc = JSON.parse(response);
-                console.log(dicc)
-                $('#datos').append(dicc.tabla);
+                $('#tabla').append(dicc.tabla);
                 $('#imagen').attr('src','data:image/png;base64, '+dicc.grafica);
             },
             error: function(error){

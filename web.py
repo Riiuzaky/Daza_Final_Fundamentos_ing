@@ -26,8 +26,10 @@ def nueva_ruta():
         if valores[i]!='':
             datos[keys[i]]=valores[i]
     df,grafica=Dframe.Generar_tabla2(datos)
+
+    grafica =grafica[grafica.columns[1:]]
     grafica.plot(figsize = (10, 10),
-                title = "ciudades",
+                title = "Grafico General de Graduados",
                 kind = 'bar',
                 x = grafica.columns[0])
     img=io.BytesIO()
