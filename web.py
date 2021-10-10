@@ -26,11 +26,20 @@ def nueva_ruta():
         if valores[i]!='':
             datos[keys[i]]=valores[i]
     df,grafica=Dframe.Generar_tabla2(datos)
+    grafica.plot(figsize = (10, 10),
+                title = "ciudades",
+                kind = 'bar',
+                x = grafica.columns[0])
+    img=io.BytesIO()
+    plt.savefig(img,format='png')
+
+    img.seek(0)
+    plot_url = base64.b64encode(img.getvalue()).decode()
     response['tabla']=df.to_html(classes='data', header=True, index=False)
-    response['grafica']=grafica.to_json()
+    response['grafica']=plot_url
     return json.dumps(response)
 
 
 
 if __name__ == "__main__":
-    app.run(port=5000, debug=True )
+    app.run(port=8000, debug=True )
