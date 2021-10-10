@@ -16,6 +16,7 @@ class Data_frame:
         valores= list(diccio.values())
         columnas=[]
         consulta=None
+        grafica=None
         for i in range(len(keys)) :
             aux=self.diccionario.get(keys[i])
             columnas.append(aux)
@@ -23,10 +24,12 @@ class Data_frame:
         df = self.data_frame.groupby(columnas,as_index=False).agg({
             'Graduados':'sum'
         })
+
         for i in range(len(columnas)):
             if columnas[i] =='Sexo':
                 if i==0:
-                    consulta=df[(df[columnas[i]]==self.sexov.get(valores[i]))]    
+                    consulta=df[(df[columnas[i]]==self.sexov.get(valores[i]))]
+                    grafica=consulta    
                 else:
                     aux=consulta[(consulta[columnas[i]]==self.sexov.get(valores[i]))]
                     consulta=aux
@@ -34,17 +37,19 @@ class Data_frame:
                 if valores[i].isnumeric():
                     if i==0:
                         consulta=df[(df[columnas[i]]==int(valores[i]))]
+                        grafica=consulta
                     else:
                         aux=consulta[(consulta[columnas[i]]==int(valores[i]))]
                         consulta=aux
                 else:
                     if i==0:
                         consulta=df[(df[columnas[i]]==(valores[i]))]
+                        grafica=consulta
                     else:
                         aux=consulta[(consulta[columnas[i]]==(valores[i]))]
                         consulta=aux        
         
-        return consulta       
+        return consulta,grafica       
 
 
     
