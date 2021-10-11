@@ -40,6 +40,7 @@ $(document).ready(function(){
                 var dicc = JSON.parse(response);
                 $('#tabla').append(dicc.tabla);
                 $('#imagen').attr('src','data:image/png;base64, '+dicc.grafica);
+                $('#imagen').css('border-style','solid');
             },
             error: function(error){
                 console.log(error);

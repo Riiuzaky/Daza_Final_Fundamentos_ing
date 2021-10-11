@@ -1,5 +1,5 @@
 .body{
-    background-color: teal;
+    background-color: #dddcdc;
 }
 .encabezado{
     display: flex;
@@ -34,7 +34,6 @@
     margin-top: 10px;
     width: 600px;
     height: 600px;
-    border-style: solid;
 }
 
 #pruebab{
